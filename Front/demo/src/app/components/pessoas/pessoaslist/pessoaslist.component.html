@@ -17,7 +17,10 @@
                         <th scope="row">{{ pessoa.id }}</th>
                         <td> {{ pessoa.nome }} </td>
                         <td> {{ pessoa.idade }} </td>
-                        <td> <button class="btn btn-primary" (click)="editar(modal1, pessoa, i)">Editar</button> </td>
+                        <td>
+                            <button class="btn btn-primary" (click)="editar(modal1, pessoa, i)">Editar</button>
+                            <button class="btn btn-danger" (click)="deletar(pessoa.id)">Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -34,9 +37,10 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-       
-        <app-pessoasdetails [pessoa]="pessoaSelecionadaParaEdicao" (retorno)="addOuEditarPessoa($event)" ></app-pessoasdetails>
-        
+
+        <app-pessoasdetails [pessoa]="pessoaSelecionadaParaEdicao"
+            (retorno)="addOuEditarPessoa($event)"></app-pessoasdetails>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

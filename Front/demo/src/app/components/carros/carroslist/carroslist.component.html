@@ -17,7 +17,10 @@
                         <th scope="row">{{ carro.id }}</th>
                         <td> {{ carro.modelo }} </td>
                         <td> {{ carro.ano }} </td>
-                        <td> <button class="btn btn-primary" (click)="editar(modal1, carro, i)">Editar</button> </td>
+                        <td>
+                             <button class="btn btn-primary" (click)="editar(modal1, carro, i)">Editar</button>
+                             <button class="btn btn-danger" (click)="deletar(carro.id)">Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

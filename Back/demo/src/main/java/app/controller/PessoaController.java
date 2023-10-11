@@ -26,14 +26,34 @@ public class PessoaController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PostMapping
 	private ResponseEntity<PessoaDTO> save(@RequestBody PessoaDTO pessoaDTO){
-		try {		
+		try {
 			PessoaDTO pessoaSalva = pessoaService.save(pessoaDTO);
 			return new ResponseEntity<>(pessoaSalva, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("/{id}")
+	private ResponseEntity<PessoaDTO> update(@PathVariable Long id, @RequestBody PessoaDTO pessoaDTO){
+		try {
+			PessoaDTO pessoaAtualizada = pessoaService.update(id, pessoaDTO);
+			return new ResponseEntity<>(pessoaAtualizada, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@DeleteMapping("/{id}")
+	private ResponseEntity<Void> delete(@PathVariable Long id){
+		try {
+			pessoaService.delete(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

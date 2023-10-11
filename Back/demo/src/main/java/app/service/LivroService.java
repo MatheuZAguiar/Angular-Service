@@ -5,7 +5,6 @@ import app.entity.Livro;
 import app.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,17 @@ public class LivroService {
         return this.toLivroDTO(livrosalvo);
     }
 
+    public LivroDTO update(Long id, LivroDTO livroDTO){
+        Livro livro = livroRepository.findById(id).orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        livro.setTitulo(livroDTO.getTitulo());
+        livro.setAutor(livroDTO.getAutor());
+
+        Livro livroAtualizado = livroRepository.save(livro);
+
+        return this.toLivroDTO(livroAtualizado);
+    }
+
     private LivroDTO toLivroDTO(Livro livro) {
         LivroDTO livroDTO = new LivroDTO();
         livroDTO.setId(livro.getId());
@@ -49,4 +59,8 @@ public class LivroService {
         return livro;
     }
 
+    public void delete(Long id){
+        Livro livro = livroRepository.findById(id).orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+        livroRepository.delete(livro);
+    }
 }

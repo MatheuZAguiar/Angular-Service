@@ -33,7 +33,7 @@ export class PessoaslistComponent {
         this.lista = lista;
       },
       error: erro => { // QUANDO DÁ ERRO
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        alert('Observe o erro no console!');
         console.error(erro);
       }
     });
@@ -47,7 +47,7 @@ export class PessoaslistComponent {
         this.lista = lista;
       },
       error: erro => { // QUANDO DÁ ERRO
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        alert('Observe o erro no console!');
         console.error(erro);
       }
     });
@@ -70,7 +70,7 @@ export class PessoaslistComponent {
 
   addOuEditarPessoa(pessoa: Pessoa) {
 
-    this.listAll();
+    this.pessoaService.update(pessoa.id, pessoa).subscribe(() => this.listAll());
 
     /*
 
@@ -84,6 +84,10 @@ export class PessoaslistComponent {
 
     this.modalService.dismissAll();
 
+  }
+
+  deletar(id: number) {
+    this.pessoaService.delete(id).subscribe(() => this.listAll());
   }
 
 }

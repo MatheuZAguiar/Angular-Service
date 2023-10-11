@@ -22,6 +22,14 @@ export class PessoaService {
     return this.http.post<Pessoa>(this.API, pessoa);
   }
 
+  update(id: number, pessoa: Pessoa): Observable<Pessoa> {
+    return this.http.put<Pessoa>(`${this.API}/${id}`, pessoa);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API}/${id}`);
+  }
+
   exemploErro(): Observable<Pessoa[]> {
     return this.http.get<Pessoa[]>(this.API + '/erro');
   }

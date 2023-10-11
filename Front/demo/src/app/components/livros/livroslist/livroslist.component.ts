@@ -67,7 +67,11 @@ export class LivroslistComponent {
   }
 
   addOuEditarLivro(livro: Livro) {
-    this.listAll();
+    this.livroService.update(livro.id, livro).subscribe(() => this.listAll());
     this.modalService.dismissAll();
+  }
+
+  deletar(id: number) {
+    this.livroService.delete(id).subscribe(() => this.listAll());
   }
 }

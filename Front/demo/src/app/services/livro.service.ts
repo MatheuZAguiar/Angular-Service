@@ -22,34 +22,16 @@ export class LivroService {
     return this.http.post<Livro>(this.API, livro);
   }
 
+  update(id: number, livro: Livro): Observable<Livro> {
+    return this.http.put<Livro>(`${this.API}/${id}`, livro);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API}/${id}`);
+  }
+
   exemploErro(): Observable<Livro[]> {
     return this.http.get<Livro[]>(this.API + '/erro');
   }
-
-
-
-  /*
-  CASO PRECISE ENVIAR REQUEST PARAMS, BASTA DECLARAR ASSIM E INCLUIR NA REQUISIÇÃO HTTP
-
-  let params = new HttpParams()
-      .set('empresaId', empresaId.toString())
-
-  return this.http.get<Pessoa[]>(this.API, { params: params});
-
-  
-  
-  SE PRECISAR COLOCAR COISAS NO HEADER DA REQUISIÇÃO
-
-
-      let headers = new HttpHeaders()
-      .set("Content-Type", "application/json");
-
-
-        return this.http.get<Pessoa[]>(this.API, { headers: headers});
-
-
-
-  */
-
 
 }

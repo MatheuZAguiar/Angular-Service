@@ -65,9 +65,12 @@ export class CarroslistComponent {
   }
 
   addOuEditarCarro(carro: Carro){
-    this.listAll();
-
+    this.carroService.update(carro.id, carro).subscribe(() => this.listAll());
     this.modalService.dismissAll();
+  }
+
+  deletar(id: number){
+    this.carroService.delete(id).subscribe(() => this.listAll());
   }
 
 }

@@ -17,7 +17,10 @@
                         <th scope="row">{{ livro.id }}</th>
                         <td> {{ livro.titulo }} </td>
                         <td> {{ livro.autor }} </td>
-                        <td> <button class="btn btn-primary" (click)="editar(modal1, livro, i)">Editar</button> </td>
+                        <td>
+                            <button class="btn btn-primary" (click)="editar(modal1, livro, i)">Editar</button>
+                            <button class="btn btn-danger" (click)="deletar(livro.id)">Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

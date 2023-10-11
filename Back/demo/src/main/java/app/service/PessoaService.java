@@ -2,10 +2,8 @@ package app.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import app.dto.PessoaDTO;
 import app.entity.Pessoa;
 import app.repository.PessoaRepository;
@@ -34,6 +32,17 @@ public class PessoaService {
 		return this.toPessoaDTO(pessoasalva);
 	}
 
+	public PessoaDTO update(Long id, PessoaDTO pessoaDTO) {
+		Pessoa pessoa = pessoaRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+
+		pessoa.setNome(pessoaDTO.getNome());
+		pessoa.setIdade(pessoaDTO.getIdade());
+
+		Pessoa pessoaAtualizada = pessoaRepository.save(pessoa);
+
+		return this.toPessoaDTO(pessoaAtualizada);
+	}
+
 	private PessoaDTO toPessoaDTO(Pessoa pessoa) {
 		PessoaDTO pessoaDTO = new PessoaDTO();
 		pessoaDTO.setId(pessoa.getId());
@@ -50,4 +59,8 @@ public class PessoaService {
 		return pessoa;
 	}
 
+	public void delete(Long id) {
+		Pessoa pessoa = pessoaRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+		pessoaRepository.delete(pessoa);
+	}
 }

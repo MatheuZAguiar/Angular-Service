@@ -37,6 +37,26 @@ public class CarroController {
         }
     }
 
+    @PutMapping("/{id}")
+    private ResponseEntity<CarroDTO> update(@PathVariable Long id, @RequestBody CarroDTO carroDTO){
+        try{
+            CarroDTO carroAtualizado = carroService.update(id, carroDTO);
+            return new ResponseEntity<>(carroAtualizado, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null , HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Void> delete(@PathVariable Long id){
+        try {
+            carroService.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("erro")
     private ResponseEntity<List<CarroDTO>> exemploErro(){return new ResponseEntity<>(null , HttpStatus.BAD_REQUEST);}
 }
